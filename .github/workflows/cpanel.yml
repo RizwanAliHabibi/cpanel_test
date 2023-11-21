@@ -8,7 +8,7 @@ jobs:
         with:
           hostname: 'https://cphost.hosttechno.com'
           cpanel_username: '{{ secrets.CPANEL_USERNAME }}'
-          repository_root: '/home2/devopshostserver/public_html/'
+          repository_root: '/home2/devopshostserver/repositories/cpanel_test/'
           cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
       - name: echo deploy-duration
         run: echo "Deployment took ${{ steps.deploy.outputs.duration }} milliseconds"
