@@ -15,4 +15,4 @@ jobs:
         ssh-port: 2303
         remote-user: devopshostserver
         private-ssh-key: ${{ secrets.SSH_KEY }}
-        destination-path: ~/public_html/
+        destination-path: /home2/devopshostserver/public_html/
