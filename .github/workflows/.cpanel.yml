@@ -6,9 +6,9 @@ jobs:
         id: deploy
         uses: pinkasey/cpanel-deploy-action@v1.0.0
         with:
-          hostname: 'https://hostname.example.com'
-          cpanel_username: 
-          repository_root: '/home/my_account/repositories/my_repository'
+          hostname: 'https://cphost.hosttechno.com'
+          cpanel_username: 'devopshostserver'
+          repository_root: '/home2/devopshostserver/public_html'
           branch: main
           cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
       - name: echo deploy-duration
