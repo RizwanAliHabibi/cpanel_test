@@ -7,7 +7,7 @@ jobs:
         uses: pinkasey/cpanel-deploy-action@v1.0.0
         with:
           hostname: 'https://cphost.hosttechno.com'
-          cpanel_username: 'devopshostserver'
+          cpanel_username: '{{ secrets.CPANEL_USERNAME }}'
           repository_root: '/home2/devopshostserver/public_html'
           branch: main
           cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
