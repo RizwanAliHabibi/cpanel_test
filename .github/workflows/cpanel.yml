@@ -1,15 +1,22 @@
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+name: Publish website to cpanel
+on: 
+	push:
+ 		branches:
+	    - main
+jobs: 
+	cPanel-Deploy-action:
+		name: Cpanel-Deploy-Action
+		runs-on: ubuntu-latest
     steps:
-      - name: Deploy to cPanel
-        id: deploy
-        uses: pinkasey/cpanel-deploy-action@v1.0.0
-        with:
-          hostname: 'https://cphost.hosttechno.com'
-          cpanel_username: '{{ secrets.CPANEL_USERNAME }}'
-          repository_root: '/home2/devopshostserver/public_html'
-          branch: main
-          cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
+		- uses: actions/checkout@v2.1.0
+			with:
+	 			fetch-depth: 2
+		- name: Cpanel-Deploy-Action
+			uses: pinkasey/cpanel-deploy-action@v1.0.0
+      with:
+      	hostname: 'https://cphost.hosttechno.com'
+        cpanel_username: '{{ secrets.CPANEL_USERNAME }}'
+        repository_root: '/home2/devopshostserver/public_html'
+        cpanel_token: '${{ secrets.CPANEL_TOKEN }}'
       - name: echo deploy-duration
         run: echo "Deployment took ${{ steps.deploy.outputs.duration }} milliseconds"
