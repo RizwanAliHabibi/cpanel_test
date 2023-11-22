@@ -14,8 +14,6 @@ jobs:
         server: ftp.devops.hostserver.link
         username: cpanel@devops.hostserver.link
         password: ${{ secrets.FTP_PASS }}
-        protocol: ftps
-        port: 2303
         exclude: |
           **/.git*
           **/.git*/**
