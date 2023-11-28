@@ -3,20 +3,17 @@ on:
   push:
     branches:
     - main
-
 jobs:
-  deploy:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: 🚀 rsync deployments
-      uses: burnett01/rsync-deployments@5.2
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
       with:
-        remote_host: cphost.hosttechno.com
-        remote_port: 2303
-        remote_user: devopshostserver
-        remote_path: /home2/devopshostserver/public_html/
-        remote_key: ${{ secrets.SSH_KEY }}
-        remote_password: ${{ secrets.SSH_PASS }}
-        remote_key_pass: ${{ secrets.SSH_KEY_PASS }}
-        switches: -avzr --delete --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore
+        key: ${{ secrets.SSH_KEY }}
+        name: id_rsa # optional
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        config: ${{ secrets.CONFIG }} # ssh_config; optional
+        if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
+    - name: rsync over SSH
+      run: rsync -avzr -e 'ssh -p 2303' ./ devopshostserver@cphost.hosttechno.com:/home2/devopshostserver/public_html/
